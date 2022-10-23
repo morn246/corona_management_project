@@ -13,15 +13,15 @@ using System.Web.UI.WebControls;
 namespace corona_management_project
 {
     public partial class Retrival : System.Web.UI.Page
-    {             
+    {
         protected void Page_Load(object sender, EventArgs e)
         {
-        
+
             if (!IsPostBack)
             {
                 theDiv.Visible = false;
                 DivTable.Visible = true;
-                
+
                 DataBindFunc(member_table, GridView_HMO_member);
                 //gvbind();
             }
@@ -40,16 +40,14 @@ namespace corona_management_project
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-               // return true;
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 Clean_Add();
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
                     error.Message), true);
-                //return false;              
             }
-        }                  
+        }
         /// <summary>
         /// function for data binding to asp.net
         /// </summary>
@@ -105,7 +103,7 @@ namespace corona_management_project
         {
             GridView_HMO_member.EditIndex = -1;
             DataBindFunc(member_table, GridView_HMO_member);
-        }      
+        }
         protected void GridView_HMO_member_RowDeleting1(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = GridView_HMO_member.Rows[e.RowIndex];
@@ -115,7 +113,7 @@ namespace corona_management_project
             CmdExecute(query);
             DataBindFunc(member_table, GridView_HMO_member);
         }
-       
+
         /// <summary>
         /// open popup for card of member
         /// </summary>
@@ -130,7 +128,7 @@ namespace corona_management_project
                 ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
             }
         }
-       
+
         /// <summary>
         /// validate inputs before save
         /// </summary>
@@ -171,7 +169,7 @@ namespace corona_management_project
             try
             {
                 validate_input_before_save();
-             
+
                 StringBuilder str = create_query_add_member();
                 CmdExecute(str);
                 DataBindFunc(member_table, GridView_HMO_member);
@@ -187,13 +185,13 @@ namespace corona_management_project
         }
         private StringBuilder create_query_add_member()
         {
-           
+
             StringBuilder query_add_member = new StringBuilder("INSERT INTO CoronaDB.dbo.HMO_member Values(");
             if (full_name.Text != "")
                 //ERROR
                 query_add_member.Append("'" + full_name.Text + "', ");
             else
-                throw new Exception("Error!  You did not enter an full name");                       
+                throw new Exception("Error!  You did not enter an full name");
             if (identity_card.Text != "")
                 //ERROR
                 query_add_member.Append(identity_card.Text + " , ");
@@ -219,7 +217,7 @@ namespace corona_management_project
                 query_add_member.Append("NULL)");
             return query_add_member;
         }
-    
+
         /// <summary>
         /// open popup for card of member
         /// </summary>
@@ -235,7 +233,7 @@ namespace corona_management_project
             }
         }
 
-          
+
         /// <summary>
         /// function for before delete member need delete 2 tables related to member
         /// </summary>

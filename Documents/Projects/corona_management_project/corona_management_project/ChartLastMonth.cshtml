@@ -1,0 +1,16 @@
+﻿@using System.Data;
+
+@{
+    var dataSet = new DataSet();
+
+    dataSet.ReadXml(Server.MapPath("LastMonth.xml"));
+    var dataView = new DataView(dataSet.Tables[0]);
+    var myChart = new Chart(width: 800, height: 600)
+       .AddTitle("The number of vaccinations per day")
+       .SetXAxis("days",1)       
+       .SetYAxis("num of vaccinations",0)
+       .AddSeries( "Default", chartType: "column",
+          xValue: dataView, xField: "Day",
+          yValues: dataView, yFields: "Amount")
+       .Write();}
+}

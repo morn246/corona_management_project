@@ -18,10 +18,6 @@ namespace corona_management_project
         {
            
         }
-        protected void btnstafflogin_Click(object sender, EventArgs e)
-        {
-            
 
-        }
     }
 }

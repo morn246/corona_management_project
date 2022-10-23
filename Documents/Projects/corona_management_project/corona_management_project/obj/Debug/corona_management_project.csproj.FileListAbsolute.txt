@@ -57,3 +57,14 @@ C:\Users\97252\Documents\Projects\corona_management_project\corona_management_pr
 C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\obj\Debug\corona_management_project.dll
 C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\obj\Debug\corona_management_project.pdb
 C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\obj\Debug\corona_management_project.csprojAssemblyReference.cache
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.Helpers.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.Razor.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.Deployment.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.Razor.dll
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.Helpers.xml
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.Razor.xml
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.xml
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.Deployment.xml
+C:\Users\97252\Documents\Projects\corona_management_project\corona_management_project\bin\System.Web.WebPages.Razor.xml

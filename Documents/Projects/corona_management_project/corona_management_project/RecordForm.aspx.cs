@@ -23,9 +23,9 @@ namespace corona_management_project
             {
                 DivAddVaccination.Visible = false;
                 DivAddPositivaCorona.Visible = false;
-                string str_query ="select * FROM CoronaDB.dbo.HMO_member where code_HMO_member =" + id;
+                string str_query = "select * FROM CoronaDB.dbo.HMO_member where code_HMO_member =" + id;
                 GetDate(str_query, 1);
-                NameMember.InnerText = "Name Member: " + Member.Full_name; 
+                NameMember.InnerText = "Name Member: " + Member.Full_name;
                 IdMember.InnerText = "ID: " + Member.Id;
 
                 DataBindFunc(vc_table1, GridViewVaccination, 1);
@@ -37,9 +37,10 @@ namespace corona_management_project
         private int id;
         private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationDB"].ConnectionString);
         private string member_table3 = "SELECT * FROM HMO_member where code_HMO_member =";
-        private string vc_table1 = "select * from CoronaDB.dbo.vaccination_member_details where code_HMO_member =";
+        private string vc_table1 = "SELECT * from CoronaDB.dbo.vaccination_member_details where code_HMO_member =";
         private string corona_table2 = "SELECT * FROM CoronaDB.dbo.positive_corona_member where code_HMO_member =";
-        HMO_member_record Member= new HMO_member_record();
+        HMO_member_record Member = new HMO_member_record();
+
         /// <summary>
         /// function for Insert/Delete/update after check the validate and correct inputs
         /// </summary>
@@ -54,9 +55,8 @@ namespace corona_management_project
             }
             catch (Exception error)
             {
-               
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
-                    error.Message), true);             
+                    error.Message), true);
             }
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace corona_management_project
             {
                 conn.Open();
                 DataSet data_set = new DataSet();
-                StringBuilder str = new StringBuilder(table_sql+id);
+                StringBuilder str = new StringBuilder(table_sql + id);
                 SqlCommand cmd = new SqlCommand(str.ToString(), conn);
                 SqlDataAdapter date_adapter = new SqlDataAdapter(cmd);
                 date_adapter.Fill(data_set);
@@ -138,11 +138,11 @@ namespace corona_management_project
                         DivAddVaccination.Visible = false;
                         DivVaccinationTable.Visible = true;
                     }
-                }                        
+                }
             }
 
             catch (Exception error)
-            {               
+            {
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
                     error.Message), true);
             }
@@ -165,7 +165,7 @@ namespace corona_management_project
         /// <summary>
         /// Get Date from db in hmo member
         /// </summary>
-        private bool  GetDate(string query, int num)
+        private bool GetDate(string query, int num)
         {
             try
             {
@@ -194,12 +194,12 @@ namespace corona_management_project
                 conn.Close();
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
                     error.Message), true);
-                return false;              
+                return false;
             }
 
         }
 
-  
+
         /// /// <summary>
         /// API Gridview for edit and delete vc
         /// </summary>
@@ -209,7 +209,7 @@ namespace corona_management_project
             StringBuilder query_delete = new StringBuilder("delete CoronaDB.dbo.vaccination_member_details where code_HMO_member="
                 + id + " and CoronaDB.dbo.vaccination_member_details.vaccination_date= '" +
                 d.ToString("yyyy-MM-dd") + "'");
-            CmdExecute(query_delete);  
+            CmdExecute(query_delete);
             DataBindFunc(vc_table1, GridViewVaccination, 1);
             DataBindFunc(corona_table2, GridViewCorona, 2);
         }
@@ -225,7 +225,7 @@ namespace corona_management_project
             t.Enabled = false;
         }
         protected void GridViewVaccination_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {           
+        {
             DateTime dateid = Convert.ToDateTime(GridViewVaccination.DataKeys[e.RowIndex].Value.ToString());
             string stringDate = dateid.ToString("yyyy-MM-dd");
             GridViewRow row = (GridViewRow)GridViewVaccination.Rows[e.RowIndex];
@@ -233,13 +233,13 @@ namespace corona_management_project
             //TextBox txtname=(TextBox)gr.cell[].control[];  
             TextBox vaccination_date = (TextBox)row.Cells[0].Controls[0];
             DropDownList code_manufacturer = row.FindControl("ManufacturerDropDownListEdit") as DropDownList;
-           
+
             GridViewVaccination.EditIndex = -1;
             conn.Open();
             //SqlCommand cmd = new SqlCommand("SELECT * FROM detail", conn);  
-            SqlCommand cmd = new SqlCommand("update CoronaDB.dbo.vaccination_member_details"+
-                " set CoronaDB.dbo.vaccination_member_details.code_manufacturer='"+code_manufacturer.SelectedValue + "'"+
-                " where CoronaDB.dbo.vaccination_member_details.code_HMO_member='" + id +"'"+
+            SqlCommand cmd = new SqlCommand("update CoronaDB.dbo.vaccination_member_details" +
+                " set CoronaDB.dbo.vaccination_member_details.code_manufacturer='" + code_manufacturer.SelectedValue + "'" +
+                " where CoronaDB.dbo.vaccination_member_details.code_HMO_member='" + id + "'" +
                 " and CoronaDB.dbo.vaccination_member_details.vaccination_date='" + stringDate + "'", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -281,20 +281,20 @@ namespace corona_management_project
             GridViewCorona.EditIndex = e.NewEditIndex;
             DataBindFunc(vc_table1, GridViewVaccination, 1);
             DataBindFunc(corona_table2, GridViewCorona, 2);
-        }           
+        }
         protected void GridViewCorona_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
             {
                 GridViewRow row = (GridViewRow)GridViewCorona.Rows[e.RowIndex];
                 GridViewCorona.EditIndex = -1;
-                StringBuilder query_update=validate_corona_update(row);                          
+                StringBuilder query_update = validate_corona_update(row);
                 CmdExecute(query_update);
                 DataBindFunc(vc_table1, GridViewVaccination, 1);
                 DataBindFunc(corona_table2, GridViewCorona, 2);
             }
             catch (Exception error)
-            {               
+            {
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
                   error.Message), true);
             }
@@ -313,27 +313,27 @@ namespace corona_management_project
             DataBindFunc(vc_table1, GridViewVaccination, 1);
             DataBindFunc(corona_table2, GridViewCorona, 2);
         }
-             
+
         /// <summary>
         /// API Gridview for edit member
         /// </summary>
         protected void GridViewHmoMember_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridViewHmoMember.EditIndex = e.NewEditIndex;      
+            GridViewHmoMember.EditIndex = e.NewEditIndex;
             DataBindFunc(member_table3, GridViewHmoMember, 3);
-        
-        }    
+
+        }
         protected void GridViewHmoMember_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
             {
                 GridViewRow row = (GridViewRow)GridViewHmoMember.Rows[e.RowIndex];
-                StringBuilder query_udate= validate_and_create_query_update(row);                         
+                StringBuilder query_udate = validate_and_create_query_update(row);
                 GridViewHmoMember.EditIndex = -1;
                 CmdExecute(query_udate);
                 DataBindFunc(member_table3, GridViewHmoMember, 3);
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 this.Page.ClientScript.RegisterStartupScript(typeof(string), "key", string.Format("alert('{0}');",
                      error.Message), true);
@@ -343,14 +343,14 @@ namespace corona_management_project
         {
             GridViewHmoMember.PageIndex = e.NewPageIndex;
             DataBindFunc(member_table3, GridViewHmoMember, 3);
-   
+
         }
         protected void GridViewHmoMember_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridViewHmoMember.EditIndex = -1;
             DataBindFunc(member_table3, GridViewHmoMember, 3);
-      
-        }       
+
+        }
 
         /// <summary>
         /// validate and save record form of member
@@ -410,7 +410,7 @@ namespace corona_management_project
                 query.Append("'" + date_positive_corona.Text + "' ) ");
             else
                 query.Append("NULL)");
-          
+
             return query;
         }
         /// <summary>
@@ -502,13 +502,13 @@ namespace corona_management_project
             {
                 throw new Exception("Error! vaccination of date is only format YYYY-MM-DD");
             }
-           
+
             StringBuilder str = new StringBuilder("select * FROM CoronaDB.dbo.vaccination_member_details V "
                         + "where  V.code_HMO_member =" + id + " and vaccination_date= '" + vaccination_date.Text + "'");
 
-           if( GetDate(str.ToString(),2)==false)
+            if (GetDate(str.ToString(), 2) == false)
                 throw new Exception("Error! You have 2 identical vaccination dates! ");
-                     
+
             if (ManufacturerDropDownList.Text != "")
                 str1.Append(ManufacturerDropDownList.Text + " ) ");
             else
@@ -538,7 +538,7 @@ namespace corona_management_project
             clean_add_corona();
             DivAddPositivaCorona.Visible = false;
             DivPositivaCoronaTable.Visible = true;
-        }        
+        }
         /// <summary>
         /// button when to add dates of corona
         /// </summary>

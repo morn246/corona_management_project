@@ -72,9 +72,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="ButtonDisplayReport" runat="server"
-                            Class="button" Text="Report"
-                            PostBackUrl="~/Report.aspx" />
+                        <asp:Button ID="ButtonDisplayQueries" runat="server"
+                            Class="button" Text="Queries"
+                            PostBackUrl="~/Queries.aspx" />
                     </td>
                 </tr>
             </table>

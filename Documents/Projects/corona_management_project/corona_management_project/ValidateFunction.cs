@@ -25,24 +25,24 @@ namespace corona_management_project
             number = number.Replace(" ", String.Empty);
             if (Regex.IsMatch(number, phone_val1) || Regex.IsMatch(number, phone_val2))
                 return true;
-            return false;         
+            return false;
         }
-       
+
         public static bool IsID(string number)
         {
             if (String.IsNullOrWhiteSpace(number))
                 return true;
             number = number.Replace(" ", String.Empty);
             return Regex.IsMatch(number, id_val);
-          
+
         }
 
         public static bool Isfull_name(string number)
         {
             if (String.IsNullOrWhiteSpace(number))
                 return true;
-           return Regex.IsMatch(number, full_name);
-           
+            return Regex.IsMatch(number, full_name);
+
         }
 
         public static bool IsAlphbet(string number)
@@ -50,7 +50,7 @@ namespace corona_management_project
             if (String.IsNullOrWhiteSpace(number))
                 return true;
             return Regex.IsMatch(number, alph_bet);
-           
+
         }
 
         public static bool IsAlphbetAndNum(string number)
@@ -58,18 +58,18 @@ namespace corona_management_project
             if (String.IsNullOrWhiteSpace(number))
                 return true;
             return Regex.IsMatch(number, alph_betNum);
-            
+
         }
 
         public static bool IsDateTime(string number)
         {
             if (String.IsNullOrWhiteSpace(number))
                 return true;
-           
+
             if (Regex.IsMatch(number, date1) || Regex.IsMatch(number, date2))
-                 return true;
+                return true;
             return false;
-                              
+
         }
 
 
